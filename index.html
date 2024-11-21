@@ -3,66 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Homepage</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Set background to black */
+            color: white; /* Text color */
+            font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #282c34;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .loader {
-            animation: spin 1s linear infinite;
-            border: 10px solid #f3f3f3;
-            border-top: 10px solid #3498db;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            margin-bottom: 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .loading-bar {
-            width: 100%;
-            height: 10px;
-            background-color: #f3f3f3;
-            margin-top: 20px;
             position: relative;
-            overflow: hidden;
         }
-        .loading-fill {
-            height: 100%;
-            width: 0;
-            background-color: orange;
-            animation: loading 8s linear forwards;
+        .container {
+            text-align: center; 
+            border: 2px solid orange; /* Neon glow effect */
+            border-radius: 15px; 
+            padding: 20px;
+            box-shadow: 0 0 20px orange;
+            background-color: rgba(0, 0, 0, 0.8); /* Slightly transparent background */
         }
-        @keyframes loading {
-            0% { width: 0; }
-            100% { width: 100%; }
+        .button {
+            background-color: transparent; /* Transparent button background */
+            border: 2px solid orange; /* Button border color */
+            border-radius: 20px; /* Rounded edges */
+            color: orange; /* Text color */
+            padding: 15px 30px; /* Button padding */
+            font-size: 16px; /* Button font size */
+            margin: 10px; /* Margin between buttons */
+            cursor: pointer; /* Change cursor on hover */
+            transition: all 0.3s ease; /* Animation for hover effect */
+        }
+        .button:hover {
+            box-shadow: 0 0 10px orange, 0 0 20px orange; /* Neon glow effect on hover */
+        }
+        /* Settings button */
+        .settings-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            outline: none;
+        }
+        .settings-button img {
+            height: 40px; /* Size of settings button image */
+            width: 40px;
+        }
+        .auth-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
     </style>
-    <script>
-        // Redirect after loading
-        window.onload = function() {
-            setTimeout(function() {
-                window.location.href = 'homepage.html'; // Change to your homepage
-            }, 8000); // Redirects after 8 seconds (8000 ms)
-        };
-    </script>
 </head>
 <body>
-    <div class="loader"></div>
-    <p>Loading some stuff...</p>
-    <div class="loading-bar">
-        <div class="loading-fill"></div>
+    <div class="container">
+        <h1>Welcome to My Homepage</h1>
+        <div>
+            <button class="button">Servers</button>
+            <button class="button">Clients</button>
+            <button class="button">News</button>
+            <button class="button">Chat</button>
+        </div>
     </div>
+
+    <div class="auth-buttons">
+        <button class="button">Login</button>
+        <button class="button">Register</button>
+    </div>
+
+    <button class="settings-button" onclick="window.location.href='settings.html'">
+        <img src="settings-icon.png" alt="Settings"> <!-- Replace with your settings icon -->
+    </button>
 </body>
 </html>
