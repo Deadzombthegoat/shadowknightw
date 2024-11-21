@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -14,6 +15,7 @@
             background-color: #282c34;
             color: white;
             font-family: Arial, sans-serif;
+            text-align: center;
         }
         .loader {
             animation: spin 1s linear infinite;
@@ -22,10 +24,29 @@
             border-radius: 50%;
             width: 60px;
             height: 60px;
+            margin-bottom: 20px;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        .loading-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #f3f3f3;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .loading-fill {
+            height: 100%;
+            width: 0;
+            background-color: orange;
+            animation: loading 8s linear forwards;
+        }
+        @keyframes loading {
+            0% { width: 0; }
+            100% { width: 100%; }
         }
     </style>
     <script>
@@ -33,12 +54,15 @@
         window.onload = function() {
             setTimeout(function() {
                 window.location.href = 'homepage.html'; // Change to your homepage
-            }, 3000); // Redirects after 3 seconds (3000 ms)
+            }, 8000); // Redirects after 8 seconds (8000 ms)
         };
     </script>
 </head>
 <body>
     <div class="loader"></div>
-    <p>Loading, please wait...</p>
+    <p>Loading some stuff...</p>
+    <div class="loading-bar">
+        <div class="loading-fill"></div>
+    </div>
 </body>
 </html>
