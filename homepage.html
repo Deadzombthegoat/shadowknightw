@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: black;
+            background-color: black; /* Default background */
             color: white;
             font-family: Arial, sans-serif;
             display: flex;
@@ -16,6 +16,7 @@
             align-items: center;
             height: 100vh;
             position: relative;
+            transition: background-image 0.5s; /* Smooth background transition */
         }
         .container {
             text-align: center; 
@@ -66,7 +67,7 @@
         }
     </style>
 </head>
-<body>
+<body id="body" style="background-image: url('bg1.png');">
     <div class="username" id="username-display">Newbie</div>
     
     <div class="container">
@@ -89,9 +90,16 @@
     </button>
 
     <script>
-        // Simulated user management
-        let currentUser = localStorage.getItem('username') || 'Newbie'; // Retrieves stored username or 'Newbie'
+        // Load user info and background settings
+        let currentUser = localStorage.getItem('username') || 'Newbie';
+        let lastUsernameChange = localStorage.getItem('lastUsernameChange');
+        let usernameChangeDelay = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+        
         document.getElementById('username-display').textContent = currentUser;
+
+        // Load background preference
+        let preferredBackground = localStorage.getItem('backgroundImage') || 'bg1.png';
+        document.body.style.backgroundImage = `url('${preferredBackground}')`;
 
         // Function to check if user is logged in before accessing chat.html
         function checkLoginAndRedirect(page) {
