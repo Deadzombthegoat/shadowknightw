@@ -4,11 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .container {
+            text-align: center; 
+            border: 2px solid orange; 
+            border-radius: 15px; 
+            padding: 20px;
+            box-shadow: 0 0 20px orange;
+            background-color: rgba(0, 0, 0, 0.8); 
+        }
+        .button {
+            background-color: transparent; 
+            border: 2px solid orange; 
+            border-radius: 20px;
+            color: orange;
+            padding: 15px 30px; 
+            font-size: 16px; 
+            margin: 10px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+        .button:hover {
+            box-shadow: 0 0 10px orange, 0 0 20px orange; 
+        }
+        .settings-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            outline: none;
+        }
+        .settings-button img {
+            height: 40px; 
+            width: 40px;
+        }
+        .auth-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .username {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            color: orange;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Homepage!</h1>
-    <p>This is the main content of your website.</p>
-    <!-- Add your other content here -->
+    <div class="username" id="username-display">Newbie</div>
+    
+    <div class="container">
+        <h1>Welcome to My Homepage</h1>
+        <div>
+            <button class="button" onclick="window.location.href='servers.html'">Servers</button>
+            <button class="button" onclick="window.location.href='clients.html'">Clients</button>
+            <button class="button" onclick="checkLoginAndRedirect('chat.html')">Chat</button>
+            <button class="button" onclick="window.location.href='news.html'">News</button>
+        </div>
+    </div>
+
+    <div class="auth-buttons">
+        <button class="button" onclick="window.location.href='login.html'">Login</button>
+        <button class="button" onclick="window.location.href='register.html'">Register</button>
+    </div>
+
+    <button class="settings-button" onclick="window.location.href='settings.html'">
+        <img src="settings-icon.png" alt="Settings"> 
+    </button>
+
+    <script>
+        // Simulated user management
+        let currentUser = localStorage.getItem('username') || 'Newbie'; // Retrieves stored username or 'Newbie'
+        document.getElementById('username-display').textContent = currentUser;
+
+        // Function to check if user is logged in before accessing chat.html
+        function checkLoginAndRedirect(page) {
+            if (currentUser === 'Newbie') {
+                alert('You must be logged in to access the Chat page.');
+            } else {
+                window.location.href = page; // Redirect to chat if logged in
+            }
+        }
+    </script>
 </body>
 </html>
