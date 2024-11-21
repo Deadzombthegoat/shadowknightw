@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid orange;
+            margin-top: 20px;
+            width: 300px;
+        }
+        .button {
+            padding: 10px 20px;
+            border: 1px solid orange;
+            border-radius: 5px;
+            background-color: transparent;
+            color: orange;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            box-shadow: 0 0 10px orange, 0 0 20px orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <input type="text" id="username-input" placeholder="Enter username" />
+    <input type="password" id="password-input" placeholder="Enter password" />
+    <button class="button" onclick="login()">Login</button>
+    <p id="error-message" style="color: red;"></p>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username-input').value;
+            const password = document.getElementById('password-input').value;
+
+            if (username && password) {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const user = users.find(user => user.username === username && user.password === password);
+                if (user) {
+                    localStorage.setItem('username', username);
+                    alert('Login successful!');
+                    window.location.href = 'homepage.html';
+                } else {
+                    document.getElementById('error-message').innerText = 'Invalid username or password.';
+                }
+            } else {
+                document.getElementById('error-message').innerText = 'Please enter both username and password.';
+            }
+        }
+    </script>
+</body>
+</html>
