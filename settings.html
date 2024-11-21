@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid orange;
+            margin-top: 20px;
+            width: 300px;
+        }
+        .button {
+            padding: 10px 20px;
+            border: 1px solid orange;
+            border-radius: 5px;
+            background-color: transparent;
+            color: orange;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            box-shadow: 0 0 10px orange, 0 0 20px orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Settings</h1>
+    <p>Change your Username:</p>
+    <input type="text" id="username-input" placeholder="Enter new username" />
+    <button class="button" onclick="changeUsername()">Save</button>
+
+    <script>
+        function changeUsername() {
+            const newUsername = document.getElementById('username-input').value;
+            if (newUsername) {
+                localStorage.setItem('username', newUsername); // Save username in localStorage
+                alert(`Username changed to: ${newUsername}`);
+                window.location.href = 'homepage.html'; // Redirect back to the homepage
+            } else {
+                alert('Please enter a username.');
+            }
+        }
+    </script>
+</body>
+</html>
