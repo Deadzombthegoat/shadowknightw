@@ -35,20 +35,52 @@
 </head>
 <body>
     <h1>Settings</h1>
-    <p>Change your Username:</p>
-    <input type="text" id="username-input" placeholder="Enter new username" />
-    <button class="button" onclick="changeUsername()">Save</button>
+    
+    <div>
+        <p>Change your Username:</p>
+        <input type="text" id="username-input" placeholder="Enter new username" />
+        <button class="button" onclick="changeUsername()">Save</button>
+    </div>
+
+    <div>
+        <p>Select a Background:</p>
+        <button class="button" onclick="changeBackground('bg1.png')">Default</button>
+        <button class="button" onclick="changeBackground('bg2.png')">Bg2</button>
+        <button class="button" onclick="changeBackground('bg3.png')">Bg3</button>
+        <button class="button" onclick="changeBackground('bg4.png')">Bg4</button>
+    </div>
 
     <script>
+        let currentUser = localStorage.getItem('username') || 'Newbie';
+        let lastUsernameChange = localStorage.getItem('lastUsernameChange');
+        let usernameChangeDelay = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+        
         function changeUsername() {
+            if (currentUser === 'Newbie') {
+                alert('You must be logged in to change your username.');
+                return;
+            }
+
             const newUsername = document.getElementById('username-input').value;
             if (newUsername) {
-                localStorage.setItem('username', newUsername); // Save username in localStorage
-                alert(`Username changed to: ${newUsername}`);
-                window.location.href = 'homepage.html'; // Redirect back to the homepage
+                let now = new Date().getTime();
+                if (!lastUsernameChange || (now - lastUsernameChange) >= usernameChangeDelay) {
+                    localStorage.setItem('username', newUsername);
+                    localStorage.setItem('lastUsernameChange', now);
+                    alert(`Username changed to: ${newUsername}`);
+                    window.location.href = 'homepage.html';
+                } else {
+                    alert('You can only change your username once every 3 days.');
+                }
             } else {
                 alert('Please enter a username.');
             }
+        }
+
+        function changeBackground(image) {
+            localStorage.setItem('backgroundImage', image);
+            document.body.style.backgroundImage = `url('${image}')`;
+            alert(`Background changed to: ${image}`);
         }
     </script>
 </body>
