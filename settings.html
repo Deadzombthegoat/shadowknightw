@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
-            transition: background-image 0.5s; /* Smooth background transition */
+            transition: background-image 0.5s;
         }
         .button {
             padding: 10px 20px;
@@ -27,20 +27,20 @@
         }
         .url-input {
             padding: 10px;
-            border-radius: 25px; /* Round input */
-            border: 2px solid orange; /* Orange glow effect */
-            background-color: black; /* Inside black */
-            color: white; /* Text color */
+            border-radius: 25px;
+            border: 2px solid orange;
+            background-color: black;
+            color: white;
             width: 300px;
             outline: none;
             transition: border 0.3s ease;
         }
         .url-input:focus {
-            border: 2px solid orange; /* Adjust border on focus for glow effect */
-            box-shadow: 0 0 10px orange; /* Add glow when focused */
+            border: 2px solid orange;
+            box-shadow: 0 0 10px orange;
         }
         .url-container {
-            margin-top: 30px; /* Spacing above the URL input */
+            margin-top: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -64,7 +64,6 @@
     </div>
 
     <script>
-        // Load and set the current background on page load
         let preferredBackground = localStorage.getItem('backgroundImage') || 'bg1.png';
         document.body.style.backgroundImage = `url('${preferredBackground}')`;
         
