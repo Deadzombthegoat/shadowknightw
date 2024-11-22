@@ -11,13 +11,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
-        }
-        input {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid orange;
-            margin-top: 20px;
-            width: 300px;
+            transition: background-image 0.5s; /* Smooth background transition */
         }
         .button {
             padding: 10px 20px;
@@ -31,17 +25,31 @@
         .button:hover {
             box-shadow: 0 0 10px orange, 0 0 20px orange;
         }
+        .url-input {
+            padding: 10px;
+            border-radius: 25px; /* Round input */
+            border: 2px solid orange; /* Orange glow effect */
+            background-color: black; /* Inside black */
+            color: white; /* Text color */
+            width: 300px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        .url-input:focus {
+            border: 2px solid orange; /* Adjust border on focus for glow effect */
+            box-shadow: 0 0 10px orange; /* Add glow when focused */
+        }
+        .url-container {
+            margin-top: 30px; /* Spacing above the URL input */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
     <h1>Settings</h1>
     
-    <div>
-        <p>Change your Username:</p>
-        <input type="text" id="username-input" placeholder="Enter new username" />
-        <button class="button" onclick="changeUsername()">Save</button>
-    </div>
-
     <div>
         <p>Select a Background:</p>
         <button class="button" onclick="changeBackground('bg1.png')">Default</button>
@@ -50,37 +58,31 @@
         <button class="button" onclick="changeBackground('bg4.png')">Bg4</button>
     </div>
 
+    <div class="url-container">
+        <input type="text" id="custom-background-url" class="url-input" placeholder="Enter image URL" />
+        <button class="button" onclick="setCustomBackground()">Enter</button>
+    </div>
+
     <script>
-        let currentUser = localStorage.getItem('username') || 'Newbie';
-        let lastUsernameChange = localStorage.getItem('lastUsernameChange');
-        let usernameChangeDelay = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+        // Load and set the current background on page load
+        let preferredBackground = localStorage.getItem('backgroundImage') || 'bg1.png';
+        document.body.style.backgroundImage = `url('${preferredBackground}')`;
         
-        function changeUsername() {
-            if (currentUser === 'Newbie') {
-                alert('You must be logged in to change your username.');
-                return;
-            }
-
-            const newUsername = document.getElementById('username-input').value;
-            if (newUsername) {
-                let now = new Date().getTime();
-                if (!lastUsernameChange || (now - lastUsernameChange) >= usernameChangeDelay) {
-                    localStorage.setItem('username', newUsername);
-                    localStorage.setItem('lastUsernameChange', now);
-                    alert(`Username changed to: ${newUsername}`);
-                    window.location.href = 'homepage.html';
-                } else {
-                    alert('You can only change your username once every 3 days.');
-                }
-            } else {
-                alert('Please enter a username.');
-            }
-        }
-
         function changeBackground(image) {
             localStorage.setItem('backgroundImage', image);
             document.body.style.backgroundImage = `url('${image}')`;
             alert(`Background changed to: ${image}`);
+        }
+
+        function setCustomBackground() {
+            const customUrl = document.getElementById('custom-background-url').value;
+            if (customUrl) {
+                localStorage.setItem('backgroundImage', customUrl);
+                document.body.style.backgroundImage = `url('${customUrl}')`;
+                alert(`Background changed to: ${customUrl}`);
+            } else {
+                alert('Please enter a valid image URL.');
+            }
         }
     </script>
 </body>
