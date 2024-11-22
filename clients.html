@@ -13,6 +13,8 @@
             background-color: #000;
             color: #fff;
             transition: background-image 0.5s; /* Smooth background transition */
+            height: 100%;
+            overflow: hidden; /* Prevent overflow */
         }
         .back-button {
             position: absolute;
@@ -31,33 +33,37 @@
             color: #e67e22;
         }
         .clients-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the box size */
+            gap: 20px; /* Space between boxes */
             padding: 20px;
             box-sizing: border-box;
+            overflow-y: auto; /* Enable scrolling if necessary */
+            height: calc(100% - 60px); /* Make space for back button */
         }
         .client-box {
             background-color: #2c2c2c;
-            padding: 20px;
+            padding: 15px;
             margin: 10px;
             border-radius: 10px;
-            width: calc(50% - 20px);
+            width: 150px; /* Set a fixed width */
+            height: 150px; /* Set a fixed height */
             box-shadow: 0 0 20px rgba(255, 152, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden; /* Hide overflow to keep the size consistent */
         }
         .client-box:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 152, 0, 1);
         }
         .client-box h2 {
-            margin-bottom: 15px;
-            font-size: 2rem;
+            margin-bottom: 10px;
+            font-size: 1.2rem; /* Smaller font size */
             text-shadow: 0 0 10px #ff9800;
         }
         .client-link {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 5px 10px;
             background-color: #ff9800;
             color: #fff;
             text-decoration: none;
@@ -66,25 +72,10 @@
             position: relative;
             overflow: hidden;
             transition: background-color 0.3s ease;
+            font-size: 0.8rem; /* Smaller font size */
         }
         .client-link:hover {
             background-color: #e67e22;
-        }
-        .client-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 152, 0, 0.4);
-            filter: blur(10px);
-            z-index: -1;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-        .client-link:hover::before {
-            opacity: 1;
         }
     </style>
 </head>
@@ -111,20 +102,59 @@
         </div>
         <div class="client-box">
             <h2>Eaglymc</h2>
-            <p>Eaglymc 1.20 beta</p>
+            <p>Eaglymc 1.20 beta.</p>
             <a href="eagly/index.html" class="client-link">Select</a>
         </div>
         <div class="client-box">
             <h2>Client 5</h2>
-            <p>More coming soon</p>
+            <p>More coming soon.</p>
             <a href="#" class="client-link">Select</a>
         </div>
         <div class="client-box">
             <h2>Client 6</h2>
-            <p>Coming Soon</p>
+            <p>Coming Soon.</p>
             <a href="#" class="client-link">Select</a>
         </div>
-        <!-- More client boxes can be added here -->
+        <div class="client-box">
+            <h2>Client 7</h2>
+            <p>Description 7.</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 8</h2>
+            <p>Description 8.</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 9</h2>
+            <p>Description 9.</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 10</h2>
+            <p>Description 10.</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 11</h2>
+            <p>Description 11.</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 12</h2>
+            <p>Description 12.</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 13</h2>
+            <p>Description 13.</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 14</h2>
+            <p>Description 14.</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
     </div>
 
     <script>
