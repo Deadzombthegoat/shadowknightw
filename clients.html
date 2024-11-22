@@ -1,1 +1,100 @@
-e
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EaglerClients</title>
+    <link rel="stylesheet" href="ec.css">
+    <link rel="shortcut icon" href="sword.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .back-button {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .clients-container {
+            display: flex;
+            flex-wrap: wrap; /* This allows the boxes to wrap */
+            justify-content: space-between; /* Distributes space between boxes */
+            max-width: 800px; /* Set a max width to center the boxes */
+            margin: auto; /* Center the container in the middle of the page */
+        }
+
+        .client-box {
+            width: calc(50% - 20px); /* Two boxes side by side with margin */
+            margin: 10px 0; /* Add some margin between rows */
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: white;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* Ensures padding and border are included in total width */
+        }
+
+        .client-box h2 {
+            margin: 0 0 10px 0;
+        }
+
+        .client-link {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .client-link:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-button">
+        <a href="index.html">&larr; Back</a>
+    </div>
+
+    <div class="clients-container">
+        <div class="client-box">
+            <h2>Resent</h2>
+            <p>Resent Client.</p>
+            <a href="resent.html" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 2</h2>
+            <p>EaglercraftX Client.</p>
+            <a href="eaglercraftx.html" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 3</h2>
+            <p>Eaglerforge</p>
+            <a href="eaglerforge.html" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 4</h2>
+            <p>Eaglymc 1.20 beta</p>
+            <a href="Eaglymcbeta.html" class="client-link">Select</a>
+        </div>
+        <div class="client-box">
+            <h2>Client 5</h2>
+            <p>More coming soon</p>
+            <a href="#" class="client-link">Select</a>
+        </div>
+    </div>
+</body>
+
+</html>
