@@ -1,99 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EaglerClients</title>
-    <link rel="stylesheet" href="ec.css">
     <link rel="shortcut icon" href="sword.png" type="image/x-icon">
     <style>
-        /* Reset and basic styling */
         body, html {
             margin: 0;
             padding: 0;
             font-family: 'Roboto', sans-serif;
-            background-color: #000; /* Set background to black */
+            background-color: #000;
             color: #fff;
+            transition: background-image 0.5s; /* Smooth background transition */
         }
-
-        /* Back button styling */
         .back-button {
             position: absolute;
             top: 20px;
             left: 20px;
         }
-
         .back-button a {
-            color: #ff9800; /* Neon orange color */
+            color: #ff9800;
             text-decoration: none;
             font-size: 1.5rem;
             font-weight: bold;
             transition: color 0.3s ease;
-            text-shadow: 0 0 10px #ff9800; /* Neon glow effect */
+            text-shadow: 0 0 10px #ff9800;
         }
-
         .back-button a:hover {
             color: #e67e22;
         }
-
-        /* Container for clients */
         .clients-container {
             display: flex;
-            flex-wrap: wrap; /* Enable wrapping */
-            justify-content: space-between; /* Distribute boxes evenly */
-            padding: 20px; /* Add padding */
-            box-sizing: border-box; /* Include padding in sizing */
-        }
-
-        /* Client box styles */
-        .client-box {
-            background-color: #2c2c2c; /* Dark gray background for boxes */
+            flex-wrap: wrap;
+            justify-content: space-between;
             padding: 20px;
-            margin: 10px 0; /* Margin between rows */
+            box-sizing: border-box;
+        }
+        .client-box {
+            background-color: #2c2c2c;
+            padding: 20px;
+            margin: 10px;
             border-radius: 10px;
-            width: calc(50% - 20px); /* Two boxes per row */
-            box-sizing: border-box; /* Include padding and border in sizing */
-            text-align: center;
-            box-shadow: 0 0 20px rgba(255, 152, 0, 0.5); /* Neon orange glow */
+            width: calc(50% - 20px);
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         .client-box:hover {
-            transform: scale(1.05); /* Scale effect on hover */
-            box-shadow: 0 0 30px rgba(255, 152, 0, 1); /* Stronger neon glow on hover */
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 152, 0, 1);
         }
-
         .client-box h2 {
             margin-bottom: 15px;
             font-size: 2rem;
-            text-shadow: 0 0 10px #ff9800; /* Neon glow effect */
+            text-shadow: 0 0 10px #ff9800;
         }
-
-        .client-box p {
-            margin-bottom: 20px;
-            font-size: 1rem;
-            color: #ccc;
-        }
-
         .client-link {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #ff9800; /* Neon orange button color */
+            background-color: #ff9800;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
             position: relative;
-            overflow: hidden; /* Ensure the glow effect is contained */
+            overflow: hidden;
             transition: background-color 0.3s ease;
         }
-
         .client-link:hover {
-            background-color: #e67e22; /* Button color on hover */
+            background-color: #e67e22;
         }
-
-        /* Glow effect on link */
         .client-link::before {
             content: '';
             position: absolute;
@@ -101,22 +77,20 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(255, 152, 0, 0.4); /* Transparent neon orange */
+            background-color: rgba(255, 152, 0, 0.4);
             filter: blur(10px);
-            z-index: -1; /* Place behind the text */
+            z-index: -1;
             transition: opacity 0.3s ease;
             opacity: 0;
         }
-
         .client-link:hover::before {
-            opacity: 1; /* Fully visible on hover */
+            opacity: 1;
         }
     </style>
 </head>
-
 <body>
     <div class="back-button">
-        <a href="index.html">&larr; Back</a>
+        <a href="index.html">← Back</a>
     </div>
 
     <div class="clients-container">
@@ -145,84 +119,17 @@
             <p>More coming soon</p>
             <a href="#" class="client-link">Select</a>
         </div>
-        
-        <!-- Added 15 "Coming Soon" boxes -->
         <div class="client-box">
             <h2>Client 6</h2>
             <p>Coming Soon</p>
             <a href="#" class="client-link">Select</a>
         </div>
-        <div class="client-box">
-            <h2>Client 7</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 8</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 9</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 10</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 11</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 12</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 13</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 14</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 15</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 16</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 17</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 18</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 19</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
-        <div class="client-box">
-            <h2>Client 20</h2>
-            <p>Coming Soon</p>
-            <a href="#" class="client-link">Select</a>
-        </div>
+        <!-- More client boxes can be added here -->
     </div>
-</body>
 
+    <script>
+        let preferredBackground = localStorage.getItem('backgroundImage') || 'bg1.png';
+        document.body.style.backgroundImage = `url('${preferredBackground}')`;
+    </script>
+</body>
 </html>
