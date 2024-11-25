@@ -32,6 +32,23 @@
         .back-button a:hover {
             color: #e67e22;
         }
+        .add-server-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ff9800;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .add-server-button:hover {
+            background-color: #e67e22;
+            box-shadow: 0 0 20px rgba(255, 152, 0, 1);
+        }
         .servers-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -39,7 +56,7 @@
             padding: 20px;
             box-sizing: border-box;
             overflow-y: auto;
-            height: calc(100% - 150px); /* Adjust based on header or button height */
+            height: calc(100% - 150px);
         }
         .server-box {
             background-color: #2c2c2c;
@@ -47,7 +64,7 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 152, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
+            position: relative;
         }
         .server-box:hover {
             transform: scale(1.05);
@@ -55,7 +72,7 @@
         }
         .server-title {
             font-size: 1.5rem;
-            margin-bottom: 10px;
+            margin: 10px 0;
             text-shadow: 0 0 10px #ff9800;
         }
         .server-description {
@@ -75,30 +92,47 @@
         .vote-button:hover {
             background-color: #e67e22;
         }
-        .add-server-container {
-            text-align: center;
-            margin: 20px;
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            z-index: 100;
         }
-        .add-server-input {
-            padding: 10px;
-            border-radius: 5px;
-            border: 2px solid orange;
-            margin-right: 10px;
-            color: white;
-            background-color: #2c2c2c;
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 99;
         }
-        .submit-button {
+        .button {
             background-color: #ff9800;
             color: white;
-            padding: 10px 15px;
+            padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
-        .submit-button:hover {
+        .button:hover {
             background-color: #e67e22;
+        }
+        .add-server-input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid orange;
+            width: calc(100% - 22px);
         }
     </style>
 </head>
@@ -107,14 +141,43 @@
         <a href="index.html">← Back</a>
     </div>
 
-    <div class="add-server-container">
-        <input type="text" id="serverName" class="add-server-input" placeholder="Server Name" />
-        <input type="text" id="serverDescription" class="add-server-input" placeholder="Server Description" />
-        <button class="submit-button" onclick="addServer()">Add Server</button>
-    </div>
+    <button class="add-server-button" onclick="showAddServerPopup()">Add Server</button>
+    <button class="add-server-button" style="margin-top: 10px;" onclick="showLoginPopup()">Login</button>
+    <button class="add-server-button" style="margin-top: 10px;" onclick="showRegisterPopup()">Register</button>
 
     <div class="servers-container" id="serversContainer">
         <!-- Server boxes will be dynamically added here -->
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closePopups()"></div>
+
+    <!-- Add Server Popup -->
+    <div class="popup" id="addServerPopup">
+        <h2>Add Server</h2>
+        <input type="text" id="serverName" class="add-server-input" placeholder="Server Name" />
+        <input type="text" id="serverDescription" class="add-server-input" placeholder="Server Description" />
+        <input type="text" id="serverIP" class="add-server-input" placeholder="Server IP" />
+        <input type="file" id="serverLogo" class="add-server-input" accept="image/*" />
+        <button class="button" onclick="addServer()">Add Server</button>
+        <button class="button" onclick="closePopups()">Cancel</button>
+    </div>
+
+    <!-- Login Popup -->
+    <div class="popup" id="loginPopup">
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" class="add-server-input" placeholder="Username" />
+        <input type="password" id="loginPassword" class="add-server-input" placeholder="Password" />
+        <button class="button" onclick="login()">Login</button>
+        <button class="button" onclick="closePopups()">Cancel</button>
+    </div>
+
+    <!-- Register Popup -->
+    <div class="popup" id="registerPopup">
+        <h2>Register</h2>
+        <input type="text" id="registerUsername" class="add-server-input" placeholder="Username" />
+        <input type="password" id="registerPassword" class="add-server-input" placeholder="Password" />
+        <button class="button" onclick="register()">Register</button>
+        <button class="button" onclick="closePopups()">Cancel</button>
     </div>
 
     <script>
@@ -122,23 +185,73 @@
         document.body.style.backgroundImage = `url('${preferredBackground}')`;
 
         let servers = [];
+        let userAuthenticated = false; // Simulated authentication
+        let isAdmin = false; // Simulated admin check
+
+        // Built-in admin account
+        const adminCredentials = {
+            username: 'admin',
+            password: 'admin123'
+        };
+
+        function showAddServerPopup() {
+            document.getElementById('addServerPopup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function showLoginPopup() {
+            document.getElementById('loginPopup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function showRegisterPopup() {
+            document.getElementById('registerPopup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closePopups() {
+            document.getElementById('addServerPopup').style.display = 'none';
+            document.getElementById('loginPopup').style.display = 'none';
+            document.getElementById('registerPopup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
 
         function addServer() {
             const serverName = document.getElementById('serverName').value;
             const serverDescription = document.getElementById('serverDescription').value;
+            const serverIP = document.getElementById('serverIP').value;
 
-            if (serverName && serverDescription) {
-                const newServer = {
-                    name: serverName,
-                    description: serverDescription,
-                    votes: 0
-                };
-                servers.push(newServer);
-                renderServers();
+            // Validate input
+            if (serverName && serverDescription && serverIP) {
+                const logoInput = document.getElementById('serverLogo');
+                const file = logoInput.files[0];
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const newServer = {
+                        name: serverName,
+                        description: serverDescription,
+                        ip: serverIP,
+                        votes: 0,
+                        voted: false,
+                        logo: e.target.result
+                    };
+                    servers.push(newServer);
+                    renderServers();
+                    closePopups();
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Please select a server logo!");
+                }
+
                 document.getElementById('serverName').value = '';
                 document.getElementById('serverDescription').value = '';
+                document.getElementById('serverIP').value = '';
+                document.getElementById('serverLogo').value = '';
             } else {
-                alert("Please enter both server name and description.");
+                alert("Please fill in all fields.");
             }
         }
 
@@ -149,19 +262,76 @@
             servers.forEach((server, index) => {
                 const serverBox = document.createElement('div');
                 serverBox.className = 'server-box';
+
                 serverBox.innerHTML = `
+                    <img src="${server.logo}" alt="Server Logo" style="width: 100%; border-radius: 5px; margin-bottom: 10px;">
                     <div class="server-title">${server.name}</div>
                     <div class="server-description">${server.description}</div>
+                    <p>IP: ${server.ip}</p>
                     <p>Votes: <strong>${server.votes}</strong></p>
                     <button class="vote-button" onclick="voteServer(${index})">Vote</button>
+                    ${isAdmin ? `<button class="vote-button" onclick="removeServer(${index})" style="background-color: red;">Remove</button>` : ""}
                 `;
+
                 serversContainer.appendChild(serverBox);
             });
         }
 
         function voteServer(index) {
-            servers[index].votes++;
-            renderServers();
+            if (userAuthenticated) {
+                if (servers[index].voted) {
+                    alert('You have already voted for this server.');
+                } else {
+                    servers[index].votes++;
+                    servers[index].voted = true; // Set a flag so the user can't vote again
+                    renderServers();
+                }
+            } else {
+                alert('You must be logged in to vote!');
+            }
+        }
+
+        function removeServer(index) {
+            if (confirm("Are you sure you want to remove this server?")) {
+                servers.splice(index, 1);
+                renderServers();
+            }
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Check for admin login
+            if (username === adminCredentials.username && password === adminCredentials.password) {
+                userAuthenticated = true;
+                isAdmin = true; // Set the user as admin
+                alert('Admin login successful!');
+                closePopups();
+                return;
+            }
+
+            // Simulate user login
+            if (username === "test" && password === "1234") {
+                userAuthenticated = true;
+                alert('User login successful!');
+                closePopups();
+            } else {
+                alert('Invalid credentials. Try again.');
+            }
+        }
+
+        function register() {
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+
+            // Simulate registration
+            if (username && password) {
+                alert('Registration successful. You can now log in.');
+                closePopups();
+            } else {
+                alert('Please fill in all fields.');
+            }
         }
     </script>
 </body>
