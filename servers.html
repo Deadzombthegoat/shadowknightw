@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servers</title>
+    <link rel="shortcut icon" href="sword.png" type="image/x-icon">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #000;
+            color: #fff;
+            transition: background-image 0.5s;
+            height: 100%;
+            overflow: hidden;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .back-button a {
+            color: #ff9800;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            text-shadow: 0 0 10px #ff9800;
+        }
+        .back-button a:hover {
+            color: #e67e22;
+        }
+        .servers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            height: calc(100% - 150px); /* Adjust based on header or button height */
+        }
+        .server-box {
+            background-color: #2c2c2c;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .server-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 152, 0, 1);
+        }
+        .server-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff9800;
+        }
+        .server-description {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        .vote-button {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .vote-button:hover {
+            background-color: #e67e22;
+        }
+        .add-server-container {
+            text-align: center;
+            margin: 20px;
+        }
+        .add-server-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid orange;
+            margin-right: 10px;
+            color: white;
+            background-color: #2c2c2c;
+        }
+        .submit-button {
+            background-color: #ff9800;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button">
+        <a href="index.html">← Back</a>
+    </div>
+
+    <div class="add-server-container">
+        <input type="text" id="serverName" class="add-server-input" placeholder="Server Name" />
+        <input type="text" id="serverDescription" class="add-server-input" placeholder="Server Description" />
+        <button class="submit-button" onclick="addServer()">Add Server</button>
+    </div>
+
+    <div class="servers-container" id="serversContainer">
+        <!-- Server boxes will be dynamically added here -->
+    </div>
+
+    <script>
+        let preferredBackground = localStorage.getItem('backgroundImage') || 'bg1.png';
+        document.body.style.backgroundImage = `url('${preferredBackground}')`;
+
+        let servers = [];
+
+        function addServer() {
+            const serverName = document.getElementById('serverName').value;
+            const serverDescription = document.getElementById('serverDescription').value;
+
+            if (serverName && serverDescription) {
+                const newServer = {
+                    name: serverName,
+                    description: serverDescription,
+                    votes: 0
+                };
+                servers.push(newServer);
+                renderServers();
+                document.getElementById('serverName').value = '';
+                document.getElementById('serverDescription').value = '';
+            } else {
+                alert("Please enter both server name and description.");
+            }
+        }
+
+        function renderServers() {
+            const serversContainer = document.getElementById('serversContainer');
+            serversContainer.innerHTML = ''; // Clear previous content
+
+            servers.forEach((server, index) => {
+                const serverBox = document.createElement('div');
+                serverBox.className = 'server-box';
+                serverBox.innerHTML = `
+                    <div class="server-title">${server.name}</div>
+                    <div class="server-description">${server.description}</div>
+                    <p>Votes: <strong>${server.votes}</strong></p>
+                    <button class="vote-button" onclick="voteServer(${index})">Vote</button>
+                `;
+                serversContainer.appendChild(serverBox);
+            });
+        }
+
+        function voteServer(index) {
+            servers[index].votes++;
+            renderServers();
+        }
+    </script>
+</body>
+</html>
