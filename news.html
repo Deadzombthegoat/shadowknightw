@@ -1,100 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Today's News in Plaxinova</title>
-  <style>
-    body {
-      background-color: white;
-      color: black;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    h1 {
-      font-size: 4rem;
-      text-align: center;
-      margin: 20px 0;
-      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: black;
-      animation: rainbow 3s infinite;
-    }
-    .news-container {
-      display: flex;
-      flex-direction: row;
-      width: 90%;
-      max-width: 1200px;
-      margin-top: 20px;
-    }
-    .news-body {
-      flex: 2;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      text-align: left;
-    }
-    .news-body p {
-      margin: 10px 0;
-    }
-    .images-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding-left: 20px;
-    }
-    .images-container img {
-      width: 100%;
-      max-width: 250px;
-      margin-bottom: 20px;
-      border: 2px solid black;
-      border-radius: 5px;
-    }
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 10px 20px;
-      font-size: 1.5rem;
-      color: white;
-      background-color: orange;
-      border: 2px solid orange;
-      border-radius: 5px;
-      text-decoration: none;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 0 15px orange;
-      transition: all 0.3s ease;
-    }
-    .back-button:hover {
-      background-color: white;
-      color: orange;
-      box-shadow: 0 0 30px orange;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's News in Plaxinova</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+        }
+        .news-body {
+            margin: 20px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 60%;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: transparent;
+            padding: 10px 15px;
+            border: 2px solid #ff9800;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.5);
+        }
+        .back-button a {
+            color: #ff9800;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            text-shadow: 0 0 10px #ff9800;
+        }
+        .back-button a:hover {
+            color: #e67e22;
+        }
+        .images-container img {
+            width: 30%;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-  <!-- Back Button -->
-  <a href="index.html" class="back-button">Back</a>
-
-  <h1>Today's News in Plaxinova</h1>
-  <div class="news-container">
+    <div class="back-button">
+        <a href="index.html">Back</a>
+    </div>
+    <h1>Today's News in Plaxinova</h1>
     <div class="news-body">
-      <p>We worked on our site for today.</p>
+      <p>We worked on our site today.<p>   
       <p>Hope yall are excited to play our new map "Verio".</p>
       <p>The images that you see on the left is something Savage Nova wanted to show you guys.</p>
       <p><strong>Question for the day:</strong><strong> Mythic </strong> or <strong> Exotic </strong>?</p>
     </div>
     <div class="images-container">
-      <img src="sneek peek.png" alt="Sneak Peek">
-      <img src="daily dose.png" alt="Daily Dose">
+        <img src="sneek peek.png" alt="Sneak Peek">
+        <img src="daily dose.png" alt="Daily Dose">
     </div>
-  </div>
 </body>
 </html>
