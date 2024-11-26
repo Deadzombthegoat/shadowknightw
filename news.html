@@ -3,36 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News</title>
+  <title>Today's News in Plaxinova</title>
   <style>
     body {
       background-color: white;
       color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 25vh;
-      margin: 0;
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
     h1 {
       font-size: 4rem;
       text-align: center;
+      margin: 20px 0;
       background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
       -webkit-background-clip: text;
       -webkit-text-fill-color: black;
       animation: rainbow 3s infinite;
     }
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .news-container {
+      display: flex;
+      flex-direction: row;
+      width: 90%;
+      max-width: 1200px;
+      margin-top: 20px;
+    }
+    .news-body {
+      flex: 2;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .news-body p {
+      margin: 10px 0;
+    }
+    .images-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left: 20px;
+    }
+    .images-container img {
+      width: 100%;
+      max-width: 250px;
+      margin-bottom: 20px;
+      border: 2px solid black;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <h1>Today's news in Plaxinova</h1>
+  <h1>Today's News in Plaxinova</h1>
+  <div class="news-container">
+    <div class="news-body">
+      <p>Today we planned for our battle royal map 🔥. The map is fire so far.</p>
+      <p>Also we found that <strong>SAVAGENOVA IS THE GAYEST MONKEY ALIVE</strong>.</p>
+    </div>
+    <div class="images-container">
+      <!-- Add images here -->
+      <img src="https://via.placeholder.com/250" alt="Battle Map Preview">
+      <img src="https://via.placeholder.com/250" alt="Plaxinova Team">
+    </div>
+  </div>
 </body>
 </html>
-
-
