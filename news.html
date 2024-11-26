@@ -51,43 +51,48 @@
     }
     .images-container img {
       width: 100%;
-      max-width: 800px; /* Increased size for both images */
+      max-width: 250px;
       margin-bottom: 20px;
       border: 2px solid black;
       border-radius: 5px;
     }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      font-size: 1.5rem;
+      color: white;
+      background-color: orange;
+      border: 2px solid orange;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 15px orange;
+      transition: all 0.3s ease;
+    }
+    .back-button:hover {
+      background-color: white;
+      color: orange;
+      box-shadow: 0 0 30px orange;
+    }
   </style>
 </head>
 <body>
+  <!-- Back Button -->
+  <a href="index.html" class="back-button">Back</a>
+
   <h1>Today's News in Plaxinova</h1>
   <div class="news-container">
     <div class="news-body">
       <p>Today we planned for our battle royal map 🔥. The map is fire so far.</p>
       <p>Also we found that <strong>SAVAGENOVA IS THE GAYEST MONKEY ALIVE</strong>.</p>
-      <p>Here's our daily dose of exposing people. Also check out our sneek peek 💀. </p>
     </div>
     <div class="images-container">
-      <img src="sneek peek.png" alt="Sneak Peek">
-      <img src="daily dose.png" alt="Daily Dose">
+      <img src="images/sneek peek.png" alt="Sneak Peek">
+      <img src="images/daily dose.png" alt="Daily Dose">
     </div>
   </div>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Page</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <a href="homepage.html" class="back-button">← Back</a>
-        <div class="news-content">
-            <!-- Your news content goes here -->
-        </div>
-    </div>
-</body>
-</html>
-
