@@ -37,14 +37,18 @@
         .server-item {
             background-color: #333333; /* Darker gray for contrast */
             border-radius: 10px;
-            padding: 10px;
+            padding: 15px;  /* Increase padding for a larger box */
             margin: 8px 0;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            font-size: 1.2rem; /* Increase font size */
+            width: 100%; /* Ensure it takes full width */
+            text-align: center; /* Center the text */
         }
 
         .server-item:hover {
             background-color: #444444; /* Darker on hover */
+            box-shadow: 0 0 20px #ff8c00; /* Neon glow effect */
         }
 
         /* Popup styles */
@@ -60,6 +64,19 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             z-index: 1000;
+            width: 300px; /* Fixed width for the popup */
+            height: 200px; /* Fixed height for the popup */
+            overflow: hidden; /* Prevent overflow */
+        }
+
+        .popup h2 {
+            font-size: 1.2rem; /* Adjust font size in popup header */
+        }
+
+        .popup p {
+            font-size: 0.9rem; /* Adjust font size for normal text */
+            overflow-wrap: break-word; /* Allow text to wrap */
+            margin-bottom: 10px; /* Space between paragraphs */
         }
 
         .popup button {
