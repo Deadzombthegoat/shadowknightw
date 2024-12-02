@@ -15,36 +15,76 @@
             font-family: Arial, sans-serif;
             background-color: #1c1c1c;
             color: #ffffff;
+            padding: 1rem;
         }
 
         .container {
             width: 80%;
-            margin: 2rem auto;
-            text-align: center;
+            margin: 0 auto;
+            text-align: left;
         }
 
         h1 {
-            margin-bottom: 2rem;
             color: #ff8c00; /* Orange */
+            margin-bottom: 1rem;
         }
 
         .server-list {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width: 400px; /* Limit the width of the server list */
+            margin-bottom: 2rem;
         }
 
         .server-item {
             background-color: #333333; /* Darker gray for contrast */
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            width: 300px; /* Set the desired width for the server item */
+            border-radius: 10px;
+            padding: 10px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .server-item h2 {
-            color: #ff8c00; /* Orange */
+        .server-item:hover {
+            background-color: #444444; /* Darker on hover */
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #444;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .popup button {
+            background-color: #ff8c00; /* Orange */
+            border: none;
+            padding: 10px;
+            color: #ffffff;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #e07b00; /* Darker orange */
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 500;
         }
 
         .back-button {
@@ -56,34 +96,103 @@
             text-decoration: none;
             margin-top: 2rem;
         }
-
+        
         .back-button:hover {
             background-color: #e07b00; /* Darker orange on hover */
         }
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Minecraft Server List</h1>
         <div class="server-list">
-            <div class="server-item">
-                <h2>Server 1</h2>
-                <p>IP: 123.456.78.90</p>
-                <p>Players: 10/100</p>
-            </div>
-            <div class="server-item">
-                <h2>Server 2</h2>
-                <p>IP: 98.765.43.21</p>
-                <p>Players: 25/100</p>
-            </div>
-            <div class="server-item">
-                <h2>Server 3</h2>
-                <p>IP: 1.2.3.4</p>
-                <p>Players: 5/50</p>
-            </div>
-            <!-- Add more server items as needed -->
+            <!-- Server items added dynamically -->
+        </div>
+
+        <div class="overlay" id="overlay"></div>
+        <div class="popup" id="popup">
+            <h2 id="popup-server-name">Server</h2>
+            <p id="popup-server-ip">IP: 123.456.78.90</p>
+            <p id="vote-status"></p>
+            <button id="vote-button">Vote</button>
+            <button id="close-popup">Close</button>
         </div>
         <a href="index.html" class="back-button">Back</a>
     </div>
+
+    <script>
+        const servers = [
+            { name: 'Server 1', ip: '123.456.78.90' },
+            { name: 'Server 2', ip: '98.765.43.21' },
+            { name: 'Server 3', ip: '1.2.3.4' },
+            { name: 'Server 4', ip: '192.168.0.1' },
+            { name: 'Server 5', ip: '10.0.0.1' },
+            { name: 'Server 6', ip: '172.16.0.1' },
+            { name: 'Server 7', ip: '203.0.113.1' },
+            { name: 'Server 8', ip: '198.51.100.1' },
+            { name: 'Server 9', ip: '192.0.2.1' },
+            { name: 'Server 10', ip: '255.255.255.255' },
+            { name: 'Server 11', ip: '8.8.8.8' },
+            { name: 'Server 12', ip: '8.8.4.4' },
+            { name: 'Server 13', ip: '140.82.112.4' },
+            { name: 'Server 14', ip: '104.244.42.1' },
+            { name: 'Server 15', ip: '149.20.20.30' },
+            { name: 'Server 16', ip: '150.100.100.100' },
+            { name: 'Server 17', ip: '192.0.2.2' },
+            { name: 'Server 18', ip: '203.0.113.2' },
+            { name: 'Server 19', ip: '198.51.100.2' },
+            { name: 'Server 20', ip: '192.168.1.1' },
+            { name: 'Server 21', ip: '10.0.0.2' },
+            { name: 'Server 22', ip: '172.16.0.2' },
+            { name: 'Server 23', ip: '1.2.3.5' },
+            // You can keep adding more servers if needed...
+        ];
+
+        const serverList = document.querySelector('.server-list');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+        const voteButton = document.getElementById('vote-button');
+        const closePopup = document.getElementById('close-popup');
+        const popupServerName = document.getElementById('popup-server-name');
+        const popupServerIp = document.getElementById('popup-server-ip');
+        const voteStatus = document.getElementById('vote-status');
+
+        let currentServer = null;
+
+        // Create server items
+        servers.forEach(server => {
+            const serverItem = document.createElement('div');
+            serverItem.classList.add('server-item');
+            serverItem.textContent = server.name;
+            serverItem.dataset.ip = server.ip;
+            serverItem.addEventListener('click', () => showPopup(server));
+            serverList.appendChild(serverItem);
+        });
+
+        function showPopup(server) {
+            currentServer = server;
+            popupServerName.textContent = server.name;
+            popupServerIp.textContent = `IP: ${server.ip}`;
+            voteStatus.textContent = localStorage.getItem(server.name) === 'voted' ? 'You have voted on this server!' : '';
+            togglePopup(true);
+        }
+
+        function togglePopup(show) {
+            popup.style.display = show ? 'block' : 'none';
+            overlay.style.display = show ? 'block' : 'none';
+        }
+
+        voteButton.addEventListener('click', () => {
+            if (currentServer) {
+                localStorage.setItem(currentServer.name, 'voted');
+                voteStatus.textContent = 'You have voted on this server!';
+                alert(`Thank you for voting for ${currentServer.name}!`);
+            }
+        });
+
+        closePopup.addEventListener('click', () => togglePopup(false));
+        overlay.addEventListener('click', () => togglePopup(false));
+    </script>
 </body>
 </html>
